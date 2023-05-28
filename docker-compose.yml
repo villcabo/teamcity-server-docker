@@ -27,6 +27,8 @@ services:
       SERVER_URL: ${AGENT_SERVER_URL:-teamcity:8111}
     volumes:
       - teamcity_agent:/data/teamcity_agent/conf
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/docker:/usr/bin/docker
 
   database:
     container_name: database-teamcity
