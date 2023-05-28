@@ -1,0 +1,32 @@
+version: '3.5'
+
+volumes:
+  teamcitydatadir:
+    name: teamcity-data-dir
+  teamcitylogs:
+    name: teamcity-logs
+  postgres:
+    name: teamcity-postgres
+
+services:
+  teamcity:
+    container_name: teamcity-server
+    image: jetbrains/teamcity-server:${TEAMCITY_VERSION:-latest}
+    restart: unless-stopped
+    volumes:
+      - teamcitydatadir:/data/teamcity_server/datadir
+      - teamcitylogs:/opt/teamcity/logs
+    ports:
+      - "${TEAMCITY_PORT:-0.0.0.0:8111}:8111"
+
+  database:
+    container_name: database-teamcity
+    image: postgres:14-alpine
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-0.0.0.0:5432}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - postgres:/var/lib/postgresql/data
