@@ -40,7 +40,8 @@ services:
     volumes:
       - ./agents/agent-1/conf:/data/teamcity_agent/conf
     environment:
-      - DOCKER_IN_DOCKER=start
+      SERVER_URL: ${AGENT_SERVER_URL:-teamcity:8111}
+      DOCKER_IN_DOCKER: start
 
   teamcity-agent-2:
     image: jetbrains/teamcity-agent:${TEAMCITY_VERSION:-2023.05}-linux-sudo
@@ -48,4 +49,5 @@ services:
     volumes:
       - ./agents/agent-2/conf:/data/teamcity_agent/conf
     environment:
-      - DOCKER_IN_DOCKER=start
+      SERVER_URL: ${AGENT_SERVER_URL:-teamcity:8111}
+      DOCKER_IN_DOCKER: start
