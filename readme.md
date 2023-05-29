@@ -2,13 +2,19 @@
 
 Deploy team city server using docker compose
 
-#### Run:
+## Previous step
+
+```
+sudo chown -R 1000:1000 teamcity-server-logs
+```
+
+### Run:
 
 ```
 docker compose up -d
 ```
 
-#### Stop:
+### Stop:
 
 ```
 docker compose down
@@ -25,7 +31,3 @@ POSTGRES_PORT=0.0.0.0:5432
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 ```
-
-# Agents
-
-It is better to install the agents manually https://www.jetbrains.com/help/teamcity/2023.05/install-teamcity-agent.html
