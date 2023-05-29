@@ -5,8 +5,6 @@ volumes:
     name: teamcity-data
   teamcity_logs:
     name: teamcity-logs
-  teamcity_agent:
-    name: teamcity-agent
   postgres:
     name: teamcity-postgres
 
@@ -20,15 +18,6 @@ services:
       - teamcity_logs:/opt/teamcity/logs
     ports:
       - "${TEAMCITY_PORT:-0.0.0.0:8111}:8111"
-
-  agent:
-    image: jetbrains/teamcity-agent
-    environment:
-      SERVER_URL: ${AGENT_SERVER_URL:-teamcity:8111}
-    volumes:
-      - teamcity_agent:/data/teamcity_agent/conf
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/local/bin/docker:/usr/bin/docker
 
   database:
     container_name: database-teamcity
