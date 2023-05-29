@@ -18,6 +18,7 @@ docker compose down
 
 ```
 TEAMCITY_VERSION=latest
+TEAMCITY_CONTEXT=/teamcity/
 TEAMCITY_PORT=0.0.0.0:8111
 
 POSTGRES_PORT=0.0.0.0:5432
