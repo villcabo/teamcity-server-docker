@@ -24,7 +24,6 @@ services:
     container_name: teamcity-server
     image: jetbrains/teamcity-server:${TEAMCITY_VERSION:-2023.05}
     restart: unless-stopped
-    privileged: true
     depends_on:
       - database
     volumes:
