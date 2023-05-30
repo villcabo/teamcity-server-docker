@@ -37,6 +37,7 @@ services:
   agent1:
     container_name: agent1-teamcity
     image: jetbrains/teamcity-agent:${TEAMCITY_VERSION:-2023.05}-linux-sudo
+    restart: unless-stopped
     privileged: true
     environment:
       AGENT_NAME: Agent MarkI
@@ -47,6 +48,7 @@ services:
   agent2:
     container_name: agent2-teamcity
     image: jetbrains/teamcity-agent:${TEAMCITY_VERSION:-2023.05}-linux-sudo
+    restart: unless-stopped
     privileged: true
     environment:
       AGENT_NAME: Agent MarkII
