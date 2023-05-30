@@ -34,20 +34,22 @@ services:
     ports:
       - "${TEAMCITY_PORT:-0.0.0.0:8111}:8111"
 
-  teamcity-agent-1:
+  agent1:
+    container_name: agent1-teamcity
     image: jetbrains/teamcity-agent:${TEAMCITY_VERSION:-2023.05}-linux-sudo
     privileged: true
-    volumes:
-      - ./agents/agent-1/conf:/data/teamcity_agent/conf
     environment:
-      SERVER_URL: ${AGENT_SERVER_URL:-teamcity:8111}
+      AGENT_NAME: Agent MarkI
+      SERVER_URL: teamcity:8111${TEAMCITY_CONTEXT:-}
       DOCKER_IN_DOCKER: start
+      AGENT_TOKEN: 71723e836df10d65390420820fe3451c
 
-  teamcity-agent-2:
+  agent2:
+    container_name: agent2-teamcity
     image: jetbrains/teamcity-agent:${TEAMCITY_VERSION:-2023.05}-linux-sudo
     privileged: true
-    volumes:
-      - ./agents/agent-2/conf:/data/teamcity_agent/conf
     environment:
-      SERVER_URL: ${AGENT_SERVER_URL:-teamcity:8111}
+      AGENT_NAME: Agent MarkII
+      SERVER_URL: teamcity:8111${TEAMCITY_CONTEXT:-}
       DOCKER_IN_DOCKER: start
+      AGENT_TOKEN: 5881d299516ed1b39a3ce8c2dc05ee00
