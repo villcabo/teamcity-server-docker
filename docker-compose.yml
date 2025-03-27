@@ -1,4 +1,4 @@
-version: '3.5'
+name: teamcity
 
 volumes:
   postgres:
@@ -9,7 +9,7 @@ volumes:
 services:
   database:
     container_name: database-teamcity
-    image: postgres:14-alpine
+    image: postgres:16-alpine
     restart: unless-stopped
     ports:
       - "${POSTGRES_PORT:-0.0.0.0:5432}:5432"
@@ -22,7 +22,7 @@ services:
 
   teamcity:
     container_name: teamcity-server
-    image: jetbrains/teamcity-server:${TEAMCITY_VERSION:-2023.05}
+    image: jetbrains/teamcity-server:${TEAMCITY_VERSION:-latest}
     restart: unless-stopped
     depends_on:
       - database
@@ -36,7 +36,7 @@ services:
 
   agent1:
     container_name: agent1-teamcity
-    image: jetbrains/teamcity-agent:${TEAMCITY_VERSION:-2023.05}-linux-sudo
+    image: jetbrains/teamcity-agent:${TEAMCITY_VERSION:-2025.03}-linux-sudo
     restart: unless-stopped
     privileged: true
     environment:
@@ -47,7 +47,7 @@ services:
 
   agent2:
     container_name: agent2-teamcity
-    image: jetbrains/teamcity-agent:${TEAMCITY_VERSION:-2023.05}-linux-sudo
+    image: jetbrains/teamcity-agent:${TEAMCITY_VERSION:-2025.03}-linux-sudo
     restart: unless-stopped
     privileged: true
     environment:
